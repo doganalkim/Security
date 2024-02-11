@@ -22,7 +22,7 @@ Func _DownloadFile($url)
     ; . -> any character
     ; * -> kleene star
     ; / -> "/" character
-    ; So, our function finds the all characters from beginning up to the last / inclusively, and replace it by the third parameter
+    ; So, our function finds the all characters from beginning up to the last "/" inclusively, and replace it by the third parameter
 
 
     $directory = @TempDir & $file ; We get the directory of the file. @TempDir is the macro that gives the temp dir as "../___ .. /"
