@@ -18,7 +18,7 @@ Func _DownloadFile($url)
     $file = StringRegExpReplace($url,"^.*/","") ; We obtain the name of the file.
     
     ; Regular Expression
-    ; ^ -> begginin of the string
+    ; ^ -> beggining of the string
     ; . -> any character
     ; * -> kleene star
     ; / -> "/" character
