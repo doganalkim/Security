@@ -4,7 +4,7 @@ from re import *
 
 def get_opts():
     parser = OptionParser()
-    parser.add_option("-i","--iface", dest = "iface", help = "The interface whose MAC you want to change")
+    parser.add_option("-i","--iface", dest = "iface", help = "The interface whose MAC you want to find out")
     (opts,args) = parser.parse_args()
     #print(f"{opts.iface} {opts.newMac}")
     return opts.iface
