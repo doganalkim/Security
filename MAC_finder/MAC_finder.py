@@ -10,12 +10,15 @@ def get_opts():
     return opts.iface
 
 def  get_MAC(i):
-    output = check_output(["ifconfig",i]).decode()
-    result = search("\w\w:\w\w:\w\w:\w\w:\w\w:\w\w",output)
-    if result:
-        print(f"[+] Your MAC address for the interface {i} is {result.group(0)}")
-    else:
-        print(f"[-] Your MAC address for the interface {i} cannot be found!")
+    try:
+        output = check_output(["ifconfig",i]).decode()
+        result = search("\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", output)
+        if result and result.group(0):
+            print(f"[+] Your MAC address for the interface {i} is {result.group(0)}")
+        else:
+            print(f"[-] Your MAC address for the interface {i} cannot be found!")
+    except:
+        print(f"[-] There is no such an interface called {i} on your PC!")
 
 def main():
     i = get_opts()
