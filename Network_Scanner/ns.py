@@ -28,7 +28,7 @@ def scan(ip):
     print("IP\t\tMAC ADRESS")
     client_list = []
     for i in ansed:
-        client = {"ip":i[i].psrc, "MAC":i[1].hwsrc}
+        client = {"ip":i[1].psrc, "MAC":i[1].hwsrc}
         client_list.append(client)
         print(i[1].psrc, end = "\t")
         print(i[1].hwsrc)
