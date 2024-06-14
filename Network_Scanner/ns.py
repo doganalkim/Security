@@ -3,10 +3,9 @@ import scapy.all as scapy
 
 
 def command_input():
-    parser = optparse.OptionParser()
-    parser.add_option("-r","--range",dest = "iprange",help = "Enter your IP range")
+    parser = optparse.OptionParser()                                                    # Initialize parser
+    parser.add_option("-r","--range",dest = "iprange",help = "Enter your IP range")     # Add range as a command line arguement
     (o,a) = parser.parse_args()
-    #print(type(o.iprange))
     return o.iprange
 def scan(ip):
     #scapy.arping(ip) # We will implement it manually
