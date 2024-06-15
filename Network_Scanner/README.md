@@ -2,6 +2,8 @@ This is a network scanner code. It displays all the devices with their IP and MA
 
 You can get help by typing "python3 ns.py --help" in terminal.
 
+IMPORTANT: You need to enter IP range for this program to be useful.
+
 You can run it by "python3 ns.py -r 192.168.64.0/24"
 
 "192.168.64.0" is just an example and /24 denotes the subnet part of the given IP address, making it a kind of range.

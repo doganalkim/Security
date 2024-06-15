@@ -1,29 +1,28 @@
-import optparse
 import scapy.all as scapy
+import optparse
 
+IP_RANGE = None
 
-def command_input():
-    parser = optparse.OptionParser()                                                    # Initialize parser
-    parser.add_option("-r","--range",dest = "iprange",help = "Enter your IP range")     # Add range as a command line arguement
-    (o,a) = parser.parse_args()
-    return o.iprange
+def parse_IP():
+    global  IP_RANGE
+    parser = optparse.OptionParser()
+    parser.add_option("-r","--range",dest = "range", help = "Enter your IP range!")
+    args,_ = parser.parse_args()
+    IP_RANGE = args.range
 
-def scan(ip):
-    arp_request = scapy.ARP(pdst = ip)
-    broadcast = scapy.Ether(dst = "ff:ff:ff:ff:ff:ff")
-    arp_request_broadcast = broadcast/arp_request
-    ansed, unansed = scapy.srp(arp_request_broadcast,timeout = 1,verbose = False)
+def scan():
+    arp_pkt = scapy.ARP(pdst = IP_RANGE)
+    ether_pkt = scapy.Ether(dst = 'ff:ff:ff:ff:ff:ff')
+    pkt = ether_pkt / arp_pkt
+    ans,_ = scapy.srp(pkt,timeout = 1, verbose = False)
+    print("\tMAC\t\t\tIP")
+    cnt = 1
+    for i in ans:
+        print("----------------------------------------------")
+        print(f'{cnt}       {i[1].src}       {i[1].psrc} ')
+        cnt+=1
 
-    print("IP\t\tMAC ADRESS")
-    client_list = []
-    for i in ansed:
-        client = {"ip":i[1].psrc, "MAC":i[1].hwsrc}
-        client_list.append(client)
-        print(i[1].psrc, end = "\t")
-        print(i[1].hwsrc)
-        print("--------------")
-
-
-ip = command_input()
-scan(ip)
+if __name__ == '__main__':
+    parse_IP()
+    scan()
 
