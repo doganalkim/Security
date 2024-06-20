@@ -3,6 +3,12 @@ import time
 import sys
 import optparse
 
+
+# For disabling warnings
+scapy.conf.verb = 0
+import logging
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
+
 TARGET_IP = None
 ROUTER_IP = None
 
